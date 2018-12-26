@@ -1,8 +1,5 @@
 ﻿using AutoMapper;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace RetailSite.Products.Api.Mapping.AutoMapperProfiles
 {
@@ -20,6 +17,10 @@ namespace RetailSite.Products.Api.Mapping.AutoMapperProfiles
 
 			CreateMap<IEnumerable<DTO.Backend.ProductImage>, DTO.Read.ProductWithImages>()
 				.ForMember(dest => dest.ProductImages, opt => opt.MapFrom(src => src));
+
+			CreateMap<DAL.Entities.Product, DTO.Update.Product>();
+
+			CreateMap<DTO.Update.Product, DAL.Entities.Product>();
 		}
 	}
 }

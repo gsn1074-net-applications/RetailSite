@@ -1,9 +1,7 @@
-﻿using RetailSite.Products.Api.DAL.Entities;
-using RetailSite.Products.Api.DTO.Backend;
-using System;
+﻿using System.Threading.Tasks;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using RetailSite.Products.Api.DTO.Backend;
+using RetailSite.Products.Api.DAL.Entities;
 
 namespace RetailSite.Products.Api.DAL.Repositories
 {
@@ -25,21 +23,12 @@ namespace RetailSite.Products.Api.DAL.Repositories
 
 		void AddProduct(Product product);
 
-		//update
+		//delete - no async
 
-
-		//delete
-
+		void DeleteProduct(Product product);
 
 		//save
+
 		Task<bool> SaveChangesAsync();
-
-
-		//Sync for load testing comparison
-
-		IEnumerable<Product> GetProducts();
-
-		Product GetProduct(int id);
-
 	}
 }

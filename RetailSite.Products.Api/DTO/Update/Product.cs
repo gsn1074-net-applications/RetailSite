@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace RetailSite.Products.Api.DTO.Create
+namespace RetailSite.Products.Api.DTO.Update
 {
 	public class Product
 	{

@@ -1,10 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using System.ComponentModel;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace RetailSite.Products.Api.Mapping.ModelBinders
 {

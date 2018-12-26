@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace RetailSite.Products.Api.DAL.Entities
 {
@@ -28,8 +24,9 @@ namespace RetailSite.Products.Api.DAL.Entities
 		[Required]
 		public decimal Price { get; set; }
 
-		public int CategoryId { get; set; }
-
+		[ForeignKey("CategoryId")]
 		public Category Category { get; set; }
+
+		public int CategoryId { get; set; }
 	}
 }

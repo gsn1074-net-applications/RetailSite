@@ -50,9 +50,9 @@ namespace RetailSite.Products.Api.DAL.Repositories
 		{
 			var httpClient = _httpClientFactory.CreateClient();
 
-			var response = await httpClient.GetAsync($"https://localhost:44339/api/productimages/{imageId}");
+			var response = await httpClient.GetAsync($"https://localhost:44339/api/productimages/{imageId}");  //TODO: move path to config
 
-			if(response.IsSuccessStatusCode)
+			if (response.IsSuccessStatusCode)
 			{
 				return JsonConvert.DeserializeObject<ProductImage>(await response.Content.ReadAsStringAsync());
 			}
@@ -65,7 +65,7 @@ namespace RetailSite.Products.Api.DAL.Repositories
 			var httpClient = _httpClientFactory.CreateClient();
 			_cancellationTokenSource = new CancellationTokenSource();
 			
-			var productImageUrls = new []
+			var productImageUrls = new [] //TODO: get path from config
 			{
 				$"https://localhost:44339/api/productimages/{productId}-large-main",
 				$"https://localhost:44339/api/productimages/{productId}-large-thumbnail1",
@@ -127,17 +127,25 @@ namespace RetailSite.Products.Api.DAL.Repositories
 			_context.Add(product);
 		}
 
-		//update
+		//delete - no async
 
+		public void DeleteProduct(Product product) 
+		{
+			if(product == null)
+			{
+				throw new ArgumentNullException(nameof(product));
+			}
 
-		//delete
-
+			_context.Products.Remove(product);
+		}
 
 		//save
 		public async Task<bool> SaveChangesAsync() 
 		{
 			return (await _context.SaveChangesAsync() > 0);
 		}
+
+		//dispose
 
 		public void Dispose()
 		{
@@ -160,19 +168,6 @@ namespace RetailSite.Products.Api.DAL.Repositories
 					_cancellationTokenSource = null;
 				}
 			}
-		}
-
-		//Sync for load test comparison
-
-		public IEnumerable<Product> GetProducts()
-		{
-			_context.Database.ExecuteSqlCommand("WAITFOR DELAY '00:00:02';");
-			return _context.Products.Include(p => p.Category).ToList();
-		}
-
-		public Product GetProduct(int id)
-		{
-			return _context.Products.Include(p => p.Category).SingleOrDefault(p => p.Id == id);
 		}
 	}
 }
